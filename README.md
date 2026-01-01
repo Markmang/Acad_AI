@@ -1,129 +1,134 @@
-# ðŸ“š ACAD AI â€“ MINI ASSESSMENT ENGINE API
+## ACAD AI  MINI ASSESSMENT ENGINE API
 
-Acad_AI is a powerful Django REST API that allows teachers and institutions to create exams, manage students, and automatically grade both MCQ and Theory questions intelligently. Students can register, authenticate, take exams, submit responses, and receive meaningful performance feedback instantly.
+Acad_AI is a Django REST API that allows staff/admin to create exams and questions, while students can register, take exams, submit answers, and receive automatic grading and feedback.
 
-This project demonstrates strong backend engineering, authentication security, structured API workflow, intelligent keyword-based grading logic, and professional backend system design suitable for production-level exam platforms.
+This project demonstrates strong backend engineering, authentication security, structured API workflow, intelligent keyword-based grading, and a professional assessment engine design suitable for real educational systems.
 
----
+------------------------------------------------------------
+FEATURES
+------------------------------------------------------------
+- Staff/Admin can create and manage exams
+- Students can register, login, and take exams
+- Supports MCQ and Theory questions
+- Fully usable via Browser and Postman
+- JWT Authentication
+- Prevents duplicate submissions
+- Timed exam support
+- Intelligent keyword-based theory grading
+- SQLite database ready to use
+- Detailed performance feedback
+- Stable and safe error handling
 
-## âœ¨ FEATURES
-- ðŸ‘¨â€ðŸ« Staff/Admin create & manage exams
-- ðŸ‘¨â€ðŸŽ“ Students register, login, and take exams
-- ðŸ§  Supports **MCQ + Theory** questions
-- ðŸ“¡ Fully usable via Browser or Postman
-- ðŸ” Secure **JWT Authentication**
-- â›” Prevents duplicate submissions
-- â³ Timed exam support
-- ðŸ§¾ Intelligent **keyword-based grading engine**
-- ðŸ—‚ SQLite ready out-of-the-box
-- ðŸŽ¯ Detailed scoring, percentage & performance feedback
-- ðŸ’¥ Clean error handling
 
----
+------------------------------------------------------------
+TECH STACK
+------------------------------------------------------------
+Python
+Django
+Django REST Framework
+JWT Authentication
+SQLite Database
 
-## ðŸ§  TECH STACK
-Python  
-Django  
-Django REST Framework  
-JWT Authentication  
-SQLite Database  
 
----
-
-## ðŸš€ PROJECT SETUP
-
-### ðŸ”½ Clone Repository
+------------------------------------------------------------
+PROJECT SETUP
+------------------------------------------------------------
+Clone Repository
+----------------
 ```bash
 git clone https://github.com/Markmang/Acad_AI.git
 cd Acad_AI
 ```
 
-### ðŸ› ï¸ Create Virtual Environment
+Create Virtual Environment
+--------------------------
 ```bash
 python -m venv venv
 ```
 
-### â–¶ï¸ Activate Virtual Environment
-**Windows**
+Activate Virtual Environment
+----------------------------
+Windows:
 ```bash
 venv\Scripts\activate
 ```
 
-**Mac/Linux**
+Mac/Linux:
 ```bash
 source venv/bin/activate
 ```
 
-### ðŸ“¦ Install Dependencies
+Install Dependencies
+--------------------
 ```bash
 pip install -r requirements.txt
 ```
 
-### ðŸ—„ Run Migrations
+Run Migrations
+--------------
 ```bash
 python manage.py migrate
 ```
 
-### â–¶ï¸ Start Server
+Start Server
+------------
 ```bash
 python manage.py runserver
 ```
 
-Server runs at:
+Server URL:
 ```
 http://localhost:8000
 ```
 
----
 
-## ðŸ—„ DATABASE
-SQLite is included.  
-No external setup required.  
+------------------------------------------------------------
+DATABASE
+------------------------------------------------------------
+SQLite database is included.
+No extra configuration needed.
 
----
 
-## ðŸ” AUTHENTICATION SYSTEM
-The system uses **JWT Authentication**.  
-Without logging in, protected routes cannot be accessed.
+------------------------------------------------------------
+AUTHENTICATION SYSTEM
+------------------------------------------------------------
+Uses JWT Authentication.
+Protected endpoints cannot be accessed without login.
 
----
 
-## ðŸ‘¥ USER TYPES
+------------------------------------------------------------
+USER TYPES
+------------------------------------------------------------
+SUPERUSER / STAFF CAN:
+- Login to Django Admin
+- Create Exams
+- Create MCQ and Theory Questions
+- Manage exam data
 
-### ðŸ›¡ SUPERUSER / STAFF Can:
-- Login to Django Admin  
-- Create Exams  
-- Create MCQ and Theory Questions  
-- Manage Exam Data  
+STUDENTS CAN:
+- Register
+- Login
+- View assigned exams
+- Start exams
+- Submit exams
+- Receive grading feedback
 
----
 
-### ðŸ‘¨â€ðŸŽ“ STUDENTS Can:
-- Register  
-- Login  
-- View assigned exams  
-- Start exams  
-- Submit exams  
-- Receive grading feedback  
-
----
-
-## ðŸ“¸ SCREENSHOTS
+------------------------------------------------------------
+SCREENSHOTS
+------------------------------------------------------------
 | Questions List | Start Exam | Submit Success |
 |----------------|------------|----------------|
 | ![Questions](screenshots/questions_list.jpg) | ![Start](screenshots/start_exam.jpg) | ![Submit](screenshots/submit_success.jpg) |
 
----
 
-## ðŸŒ REGISTRATION & LOGIN â€” BROWSABLE API
-
-### âœ… STEP 1 â€” Register Student
-**Endpoint:**
-```
+------------------------------------------------------------
+REGISTRATION & LOGIN (BROWSABLE API)
+------------------------------------------------------------
+STEP 1: Register Student
 POST /api/register/
-```
 
-**Request Body**
+Body:
 ```json
 {
   "username": "student1",
@@ -132,12 +137,8 @@ POST /api/register/
 }
 ```
 
----
-
-### âœ… STEP 2 â€” Login
-```
+STEP 2: Login
 POST /api/auth/login/
-```
 
 Returns:
 ```
@@ -145,26 +146,16 @@ access
 refresh
 ```
 
-Copy ACCESS TOKEN
+Copy the access token.
 
----
+STEP 3: Authenticate Browser
+Use Bearer Token authentication
 
-### âœ… STEP 3 â€” Authenticate Browser
-Click:
-```
-Login / Authenticate
-```
-Select:
-```
-Bearer Token
-```
-Paste Token
 
----
-
-## ðŸ§ª STUDENT EXAM FLOW (BROWSER)
-
-### ðŸ“¥ View Exam Questions
+------------------------------------------------------------
+STUDENT EXAM FLOW (BROWSER)
+------------------------------------------------------------
+View Exam Questions
 ```
 GET /api/exams/<exam_id>/questions/
 ```
@@ -174,21 +165,17 @@ Example:
 GET /api/exams/1/questions/
 ```
 
----
-
-### â–¶ï¸ Start Exam (Required)
+Start Exam
 ```
 POST /api/exams/1/start/
 ```
 
----
-
-### ðŸ“¤ Submit Exam
+Submit Exam
 ```
 POST /api/exams/1/submit/
 ```
 
-Body Example
+Body Example:
 ```json
 {
   "answers": [
@@ -199,53 +186,47 @@ Body Example
 }
 ```
 
----
 
-## ðŸ“Œ POSTMAN / THUNDER CLIENT FLOW
-
-### STEP 1 â€” Register
-```
+------------------------------------------------------------
+POSTMAN / THUNDER CLIENT FLOW
+------------------------------------------------------------
+Register
 POST http://localhost:8000/api/register/
-```
 
-### STEP 2 â€” Login
-```
+Login
 POST http://localhost:8000/api/auth/login/
-```
 
 Copy access token
 
-### STEP 3 â€” Set Token
-Auth Tab â†’ Bearer Token  
-Paste Token  
-
+Set Token
+Use Bearer Token Authentication
 Or Header:
 ```
 Authorization: Bearer <token>
 ```
 
-### STEP 4 â€” Student Actions
+Student Actions
 ```
 GET http://localhost:8000/api/exams/1/questions/
 POST http://localhost:8000/api/exams/1/start/
 POST http://localhost:8000/api/exams/1/submit/
 ```
 
----
 
-## ðŸ›¡ EXAM SECURITY RULES
-- Student must start exam before submitting  
-- Student cannot submit twice  
-- Student cannot submit another userâ€™s exam  
-- Exam countdown starts after starting  
-- Expired exams block submission  
-- Safe failure handling  
+------------------------------------------------------------
+EXAM SECURITY RULES
+------------------------------------------------------------
+- Student must start exam before submitting
+- Student cannot submit twice
+- Student cannot submit another student's exam
+- Exam countdown starts after starting
+- Expired exams block submission safely
 
----
 
-## ðŸ§‘â€ðŸ« STAFF & ADMIN
-
-### Create Superuser
+------------------------------------------------------------
+STAFF & ADMIN
+------------------------------------------------------------
+Create Superuser
 ```bash
 python manage.py createsuperuser
 ```
@@ -255,16 +236,15 @@ Login:
 http://localhost:8000/admin/
 ```
 
-Create Staff + Assign Privileges
+Create staff user and assign staff role.
 
----
 
-## ðŸ“ STAFF CREATES EXAM
-```
+------------------------------------------------------------
+STAFF CREATES EXAM
+------------------------------------------------------------
 POST /api/exams/
-```
 
-Example
+Example:
 ```json
 {
   "title": "Biology Test",
@@ -277,12 +257,11 @@ Example
 }
 ```
 
----
 
-## âž• ADD MCQ QUESTION
-```
+------------------------------------------------------------
+ADD MCQ QUESTION
+------------------------------------------------------------
 POST /api/exams/<exam_id>/questions/add/
-```
 
 ```json
 {
@@ -294,9 +273,10 @@ POST /api/exams/<exam_id>/questions/add/
 }
 ```
 
----
 
-## ðŸ§  ADD THEORY QUESTION
+------------------------------------------------------------
+ADD THEORY QUESTION
+------------------------------------------------------------
 ```json
 {
   "text": "What is a cell?",
@@ -310,50 +290,51 @@ POST /api/exams/<exam_id>/questions/add/
 }
 ```
 
----
 
-## ðŸ§® GRADING ENGINE
+------------------------------------------------------------
+GRADING ENGINE
+------------------------------------------------------------
+MCQ:
+Correct = full marks
+Wrong = zero
 
-### MCQ
-âœ” Correct â†’ Full marks  
-âŒ Wrong â†’ 0  
+Theory:
+Keyword-based grading
+Partial score supported
+Feedback shows matched and expected keywords
 
-### THEORY
-âœ” Intelligent keyword-based grading  
-âœ” Partial scoring  
-âœ” Feedback shows matched + expected keywords  
 
----
-
-## ðŸ OVERALL SCORE
+------------------------------------------------------------
+OVERALL SCORE
+------------------------------------------------------------
 Percentage:
-```
 (total score / total marks) * 100
-```
 
-Feedback:
-- 85â€“100 = Excellent
-- 70â€“84 = Good
-- 50â€“69 = Fair
-- Below 50 = Poor
+Performance Levels:
+85 - 100 = Excellent
+70 - 84 = Good
+50 - 69 = Fair
+Below 50 = Poor
 
----
 
-## ðŸ§© FRONTEND INTEGRATION
+------------------------------------------------------------
+FRONTEND INTEGRATION
+------------------------------------------------------------
 Works with:
-React  
-Next.js  
-Vue  
-Flutter  
-Android  
-iOS  
+React
+Next.js
+Vue
+Flutter
+Android
+iOS
 
-Student Journey:
-Login â†’ Token â†’ Fetch â†’ Start â†’ Answer â†’ Submit â†’ Results
+Student Process:
+Login  Token Fetch Questions  Start Exam  Submit  Results
 
----
 
-## ðŸ‘¤ AUTHOR
-Udeagha Mark Mang  
-Backend Engineer  
-Python | Django | Problem Solver  
+------------------------------------------------------------
+AUTHOR
+------------------------------------------------------------
+Udeagha Mark Mang
+Backend Engineer
+Python | Django | Problem Solver
