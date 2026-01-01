@@ -1,369 +1,359 @@
-# Acad_AI
-ACAD AI – MINI ASSESSMENT ENGINE API
+# ðŸ“š ACAD AI â€“ MINI ASSESSMENT ENGINE API
 
-This project is a Django REST API for an exam system where Staff/Admin can create exams and questions, while Students can take exams, submit answers, and receive automated grading and feedback.
+Acad_AI is a powerful Django REST API that allows teachers and institutions to create exams, manage students, and automatically grade both MCQ and Theory questions intelligently. Students can register, authenticate, take exams, submit responses, and receive meaningful performance feedback instantly.
 
-It supports:
+This project demonstrates strong backend engineering, authentication security, structured API workflow, intelligent keyword-based grading logic, and professional backend system design suitable for production-level exam platforms.
 
-MCQ Questions
+---
 
-Theory Questions with intelligent keyword-based partial grading
+## âœ¨ FEATURES
+- ðŸ‘¨â€ðŸ« Staff/Admin create & manage exams
+- ðŸ‘¨â€ðŸŽ“ Students register, login, and take exams
+- ðŸ§  Supports **MCQ + Theory** questions
+- ðŸ“¡ Fully usable via Browser or Postman
+- ðŸ” Secure **JWT Authentication**
+- â›” Prevents duplicate submissions
+- â³ Timed exam support
+- ðŸ§¾ Intelligent **keyword-based grading engine**
+- ðŸ—‚ SQLite ready out-of-the-box
+- ðŸŽ¯ Detailed scoring, percentage & performance feedback
+- ðŸ’¥ Clean error handling
 
-Timed exams
+---
 
-Student must START exam before submitting
+## ðŸ§  TECH STACK
+Python  
+Django  
+Django REST Framework  
+JWT Authentication  
+SQLite Database  
 
-Prevents multiple submissions
+---
 
-Secure authentication
+## ðŸš€ PROJECT SETUP
 
-Fully usable via Browser or Postman / Thunder Client
-
-TECH STACK
-
-Python
-Django
-Django REST Framework
-JWT Authentication
-SQLite Database
-
-PROJECT SETUP
-
-Clone Repository
-git clone <your github repo link>
+### ðŸ”½ Clone Repository
+```bash
+git clone https://github.com/Markmang/Acad_AI.git
 cd Acad_AI
+```
 
-Create Virtual Environment
+### ðŸ› ï¸ Create Virtual Environment
+```bash
 python -m venv venv
+```
 
-Activate Virtual Environment
-Windows:
+### â–¶ï¸ Activate Virtual Environment
+**Windows**
+```bash
 venv\Scripts\activate
-Mac/Linux:
+```
+
+**Mac/Linux**
+```bash
 source venv/bin/activate
+```
 
-Install Dependencies
+### ðŸ“¦ Install Dependencies
+```bash
 pip install -r requirements.txt
+```
 
-Run Migrations
+### ðŸ—„ Run Migrations
+```bash
 python manage.py migrate
+```
 
-Start Server
+### â–¶ï¸ Start Server
+```bash
 python manage.py runserver
+```
 
 Server runs at:
+```
 http://localhost:8000
+```
 
-DATABASE
+---
 
-SQLite is included. No setup required.
+## ðŸ—„ DATABASE
+SQLite is included.  
+No external setup required.  
 
-AUTHENTICATION SYSTEM
+---
 
-The system uses JWT Authentication.
-Without logging in, you cannot perform protected student or staff actions.
+## ðŸ” AUTHENTICATION SYSTEM
+The system uses **JWT Authentication**.  
+Without logging in, protected routes cannot be accessed.
 
-USER TYPES
+---
 
-SUPERUSER / STAFF
-Can:
+## ðŸ‘¥ USER TYPES
 
-Login to Django Admin
+### ðŸ›¡ SUPERUSER / STAFF Can:
+- Login to Django Admin  
+- Create Exams  
+- Create MCQ and Theory Questions  
+- Manage Exam Data  
 
-Create Exams
+---
 
-Create MCQ and Theory Questions
+### ðŸ‘¨â€ðŸŽ“ STUDENTS Can:
+- Register  
+- Login  
+- View assigned exams  
+- Start exams  
+- Submit exams  
+- Receive grading feedback  
 
-Manage Exam Data
+---
 
-STUDENTS
-Can:
+## ðŸ“¸ SCREENSHOTS
+| Questions List | Start Exam | Submit Success |
+|----------------|------------|----------------|
+| ![Questions](screenshots/questions_list.jpg) | ![Start](screenshots/start_exam.jpg) | ![Submit](screenshots/submit_success.jpg) |
 
-Register
+---
 
-Login
+## ðŸŒ REGISTRATION & LOGIN â€” BROWSABLE API
 
-View exams assigned
-
-Start exams
-
-Submit exams
-
-Get grading feedback
-
-REGISTRATION AND LOGIN - BROWSABLE API FLOW
-
-STEP 1: REGISTER A STUDENT ACCOUNT
-Endpoint:
+### âœ… STEP 1 â€” Register Student
+**Endpoint:**
+```
 POST /api/register/
+```
 
-Request Body:
+**Request Body**
+```json
 {
-"username": "student1",
-"password": "password123",
-"email": "student@email.com
-"
+  "username": "student1",
+  "password": "password123",
+  "email": "student@email.com"
 }
+```
 
-After registration, student can login.
+---
 
-STEP 2: LOGIN (BROWSABLE API)
-
-Go to:
+### âœ… STEP 2 â€” Login
+```
 POST /api/auth/login/
+```
 
-Enter:
-username
-password
-
-Server will return:
-access token
-refresh token
-
-Copy the ACCESS TOKEN.
-
-STEP 3: AUTHENTICATE BROWSABLE API
-
-In top right corner of Django Browsable API:
-Click "Login / Authenticate"
-Choose "Bearer / JWT Token"
-Paste access token.
-
-Now the student is authenticated.
-
-STEP 4: STUDENT TAKES EXAM (FULL FLOW IN BROWSER)
-
-View exam questions
-GET /api/exams/<exam_id>/questions/
-
-Example:
-GET /api/exams/1/questions/
-
-Start exam (required before submit)
-POST /api/exams/1/start/
-
-If student tries submitting without starting, server will reject gracefully.
-
-Submit Exam
-POST /api/exams/1/submit/
-
-Example Body:
-{
-"answers": [
-{ "question": 1, "answer": "Chlorophyll" },
-{ "question": 2, "answer": "ear" },
-{ "question": 5, "answer": "A cell is the basic unit of life" }
-]
-}
-
-Response Returned:
-
-Each question grading
-
-Each question feedback
-
-Total marks
-
-Total score
-
-Percentage
-
-Overall Exam Performance Comment
-
-Example Final Feedback Types:
-Excellent performance
-Good job
-Fair attempt
-Poor performance
-
-REGISTRATION AND LOGIN - POSTMAN / THUNDER CLIENT
-STEP 1: REGISTER STUDENT
-
-POST http://localhost:8000/api/register/
-
-Body:
-{
-"username": "student1",
-"password": "password123",
-"email": "student@email.com
-"
-}
-
-STEP 2: LOGIN TO GET TOKEN
-
-POST http://localhost:8000/api/auth/login/
-
-Body:
-{
-"username": "student1",
-"password": "password123"
-}
-
-Response Contains:
+Returns:
+```
 access
 refresh
+```
 
-Copy ACCESS
+Copy ACCESS TOKEN
 
-STEP 3: SET AUTH TOKEN IN POSTMAN
+---
 
-Open request
-Go to "Auth" tab
-Choose Bearer Token
-Paste access token
+### âœ… STEP 3 â€” Authenticate Browser
+Click:
+```
+Login / Authenticate
+```
+Select:
+```
+Bearer Token
+```
+Paste Token
 
-OR manually add header
-Authorization: Bearer <TOKEN>
+---
 
-STEP 4: STUDENT EXAM FLOW IN POSTMAN
+## ðŸ§ª STUDENT EXAM FLOW (BROWSER)
 
-Get Questions
+### ðŸ“¥ View Exam Questions
+```
+GET /api/exams/<exam_id>/questions/
+```
+
+Example:
+```
+GET /api/exams/1/questions/
+```
+
+---
+
+### â–¶ï¸ Start Exam (Required)
+```
+POST /api/exams/1/start/
+```
+
+---
+
+### ðŸ“¤ Submit Exam
+```
+POST /api/exams/1/submit/
+```
+
+Body Example
+```json
+{
+  "answers": [
+    { "question": 1, "answer": "Chlorophyll" },
+    { "question": 2, "answer": "ear" },
+    { "question": 5, "answer": "A cell is the basic unit of life" }
+  ]
+}
+```
+
+---
+
+## ðŸ“Œ POSTMAN / THUNDER CLIENT FLOW
+
+### STEP 1 â€” Register
+```
+POST http://localhost:8000/api/register/
+```
+
+### STEP 2 â€” Login
+```
+POST http://localhost:8000/api/auth/login/
+```
+
+Copy access token
+
+### STEP 3 â€” Set Token
+Auth Tab â†’ Bearer Token  
+Paste Token  
+
+Or Header:
+```
+Authorization: Bearer <token>
+```
+
+### STEP 4 â€” Student Actions
+```
 GET http://localhost:8000/api/exams/1/questions/
-
-Start exam
 POST http://localhost:8000/api/exams/1/start/
-
-Submit exam
 POST http://localhost:8000/api/exams/1/submit/
+```
 
-Body Example:
-{
-"answers": [
-{ "question": 1, "answer": "Chlorophyll" },
-{ "question": 2, "answer": "ear" },
-{ "question": 5, "answer": "A cell is the basic unit of life" }
-]
-}
+---
 
-EXAM SECURITY RULES
+## ðŸ›¡ EXAM SECURITY RULES
+- Student must start exam before submitting  
+- Student cannot submit twice  
+- Student cannot submit another userâ€™s exam  
+- Exam countdown starts after starting  
+- Expired exams block submission  
+- Safe failure handling  
 
-Student must start exam before submitting
-Student cannot submit twice
-Student cannot submit another student exam
-Exam is timed from START time not creation time
-If time over → submission blocked safely
-Handles errors gracefully without crashing
+---
 
-STAFF AND ADMIN USAGE
-CREATE SUPERUSER
+## ðŸ§‘â€ðŸ« STAFF & ADMIN
 
+### Create Superuser
+```bash
 python manage.py createsuperuser
+```
 
-Login to:
+Login:
+```
 http://localhost:8000/admin/
+```
 
-CREATE STAFF
+Create Staff + Assign Privileges
 
-In admin panel:
+---
 
-Create user
-
-Assign staff privileges
-
-STAFF CREATES EXAM
-
+## ðŸ“ STAFF CREATES EXAM
+```
 POST /api/exams/
+```
 
-Body:
+Example
+```json
 {
-"title": "Biology Test",
-"course": "Biology 101",
-"duration": 60,
-"metadata": {
-"level": "Intermediate",
-"topic": "Cells and Anatomy"
+  "title": "Biology Test",
+  "course": "Biology 101",
+  "duration": 60,
+  "metadata": {
+    "level": "Intermediate",
+    "topic": "Cells and Anatomy"
+  }
 }
-}
+```
 
-STAFF ADDS MCQ QUESTION
+---
 
+## âž• ADD MCQ QUESTION
+```
 POST /api/exams/<exam_id>/questions/add/
+```
 
-Body Example:
+```json
 {
-"text": "Where is the smallest bone?",
-"question_type": "MCQ",
-"marks": 2,
-"options": ["ear", "leg", "nose", "arm"],
-"correct_answer": "ear"
+  "text": "Where is the smallest bone?",
+  "question_type": "MCQ",
+  "marks": 2,
+  "options": ["ear", "leg", "nose", "arm"],
+  "correct_answer": "ear"
 }
+```
 
-STAFF ADDS THEORY QUESTION
+---
 
+## ðŸ§  ADD THEORY QUESTION
+```json
 {
-"text": "What is a cell?",
-"question_type": "THEORY",
-"marks": 5,
-"expected_keywords": [
-"smallest",
-"basic unit of life",
-"processes"
-]
+  "text": "What is a cell?",
+  "question_type": "THEORY",
+  "marks": 5,
+  "expected_keywords": [
+    "smallest",
+    "basic unit of life",
+    "processes"
+  ]
 }
+```
 
-STAFF CAN ALSO:
+---
 
-Use Admin Panel to manage questions and exams
-Edit questions
-Delete questions
-Modify duration
-View submissions
+## ðŸ§® GRADING ENGINE
 
-GRADING ENGINE
+### MCQ
+âœ” Correct â†’ Full marks  
+âŒ Wrong â†’ 0  
 
-MCQ
-Correct answer → full marks
-Wrong answer → zero
-Feedback included
+### THEORY
+âœ” Intelligent keyword-based grading  
+âœ” Partial scoring  
+âœ” Feedback shows matched + expected keywords  
 
-THEORY
-Keyword based intelligent grading:
-Detects how many expected points student hits
-Partial scores supported
-Feedback includes:
-Matched keywords
-Expected full keywords list
+---
 
-OVERALL EXAM SCORE
+## ðŸ OVERALL SCORE
+Percentage:
+```
+(total score / total marks) * 100
+```
 
-Percentage calculated:
-(total score earned / total marks) * 100
+Feedback:
+- 85â€“100 = Excellent
+- 70â€“84 = Good
+- 50â€“69 = Fair
+- Below 50 = Poor
 
-Feedback categories:
-85 – 100 = Excellent
-70 – 84 = Good
-50 – 69 = Fair
-Below 50 = Poor
+---
 
-FRONTEND INTEGRATION
+## ðŸ§© FRONTEND INTEGRATION
+Works with:
+React  
+Next.js  
+Vue  
+Flutter  
+Android  
+iOS  
 
-Frontend can easily use API
+Student Journey:
+Login â†’ Token â†’ Fetch â†’ Start â†’ Answer â†’ Submit â†’ Results
 
-Typical student journey:
-Login → Save JWT
-Fetch questions
-Start exam
-Display countdown timer
-User answers questions
-Submit exam
-Display grading results
+---
 
-Frontend Suggestions:
-React
-Next.js
-Vue
-Flutter
-Android
-iOS
-
-SCREENSHOTS (included in screenshots folder)
-
-questions_list.jpg – student question fetch view
-start_exam.jpg – student starting exam
-submit_success.jpg – grading response
-
-AUTHOR
-
-Udeagha Mark Mang
-Backend Engineer
-Python | Django | Problem Solver
+## ðŸ‘¤ AUTHOR
+Udeagha Mark Mang  
+Backend Engineer  
+Python | Django | Problem Solver  
